@@ -27,7 +27,8 @@ int main(){
 		char *prob;
 
 		t = strtok(line, "|");
-		prob = strtok(NULL, "|");
+		//prob = strtok(NULL, "|");
+		prob = strtok(NULL, "\n");
 		//printf("%s\t", strdup(prob));
 		printf("%s %s\n", t, prob);
 		
@@ -43,6 +44,22 @@ int main(){
 	char *temp;
 	char ch[STRING_SIZE];
 	
+	
+	while(!feof(stdin)){
+		printf("Enter the message : ");
+		gets(ch);
+		temp = strtok(ch, " ");
+		while(temp != NULL){
+			printf("%s\n", temp);
+			char * returned;
+			returned = g_hash_table_lookup(read, strdup(temp));
+			if(returned != NULL){   
+				printf("%s\n", returned);
+			}   
+			temp = strtok(NULL," ");
+		}
+	}
+/*
 	while(!feof(stdin)){
 		printf("Enter the message : ");
 		gets(ch);
@@ -56,7 +73,7 @@ int main(){
 			temp = strtok(NULL," ");
 		}
 		
-	}
+	}*/
 
 
 
