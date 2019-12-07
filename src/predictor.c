@@ -45,13 +45,13 @@ int main(){
 	
 	while(!feof(stdin)){
 		printf("Enter the message : ");
-		scanf("%s",ch);
+		gets(ch);
 		temp = strtok(ch, " ");
 		while(temp != NULL){
 			
 			//일단 temp에 입력된 문장이 단어로 잘려서 들어갈 수 있도록 만들어 놨어요!	
 			//이 temp를 key로 활용해서 value값을 구해오면 될 거 같아요.
-			printf("%s\n", temp);
+			printf("temp: %s\n", temp);
 			
 			temp = strtok(NULL," ");
 		}
