@@ -18,7 +18,7 @@ void probToFloat(char*);
         char ch[STRING_SIZE];
 
 int main(){
-        FILE *f = fopen("./model.csv", "r");
+        FILE *f = fopen("./model_space.csv", "r");
         GHashTable *read = g_hash_table_new(g_str_hash, g_str_equal);
         char * line = 0x0 ;
         size_t r ;
@@ -28,7 +28,7 @@ int main(){
                 char * _line = line ;
                 char *prob;
 
-                t = strtok(line, "|");
+                t = strtok(line, " ");
                 prob = strtok(NULL, "\n");
 
                 g_hash_table_insert(read, strdup(t), strdup(prob));
@@ -37,7 +37,7 @@ int main(){
                 line = 0x0;
         }
         // 제대로 hash 생성되었는지 확인
-//      g_hash_table_foreach(read, print_prob, 0x0);
+        g_hash_table_foreach(read, print_prob, 0x0);
         fclose(f);
 
 
@@ -67,12 +67,12 @@ int main(){
 					strcpy(word4Prob, returned);
 
 					if(word4Prob != NULL){
-						char* tmp4Prob = strtok(word4Prob, "|"); // 1. |을 토대로 나누는거 strtok말고 다른 방법으로
+						char* tmp4Prob = strtok(word4Prob, " "); // 1. |을 토대로 나누는거 strtok말고 다른 방법으로
 						float prob[2];
 						
 						for(int i = 0; tmp4Prob != NULL ; i++){
 							prob[i] = atof(tmp4Prob);
-							tmp4Prob = strtok(NULL, "|"); // 2.
+							tmp4Prob = strtok(NULL, " "); // 2.
 						}
 						printf("prob[0]: %f, prob[1]: %f\n", prob[0], prob[1]);
 					}
