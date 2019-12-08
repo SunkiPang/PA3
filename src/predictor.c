@@ -40,7 +40,7 @@ int main(){
         g_hash_table_foreach(read, print_prob, 0x0);
         fclose(f);
 
-
+ 
         int idx = 0;    // 후에 몇개의 확률이 있는지 알고 for문으로 몇번 돌릴지 알려주기 위해 만든 변수
        
 		while(!feof(stdin)){
