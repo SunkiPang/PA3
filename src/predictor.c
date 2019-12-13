@@ -100,4 +100,3 @@ void makeHash(FILE *f, GHashTable *read) {
                 line = 0x0;
         }
 }
-
