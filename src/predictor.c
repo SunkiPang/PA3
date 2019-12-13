@@ -14,7 +14,7 @@ void print_prob (gpointer key, gpointer value, gpointer userdata) {
 }
 float neg_sum, non_sum;
 int main() {
-        FILE *f = fopen("./model_space.csv", "r");
+        FILE *f = fopen("../data/model.csv", "r");
         GHashTable *read = g_hash_table_new(g_str_hash, g_str_equal);
         makeHash(f, read);
         // 제대로 hash 생성되었는지 확인
@@ -49,11 +49,11 @@ int main() {
                                 char word4Prob[STRING_SIZE];
                                 strcpy(word4Prob, returned);
                                 if(word4Prob != NULL) {
-                                        char* tmp4Prob = strtok(word4Prob, " ");
+                                        char* tmp4Prob = strtok(word4Prob, ", ");
                                         float prob[2];
                                         for (int i = 0; tmp4Prob != NULL ; i++) {
                                                 prob[i] = atof(tmp4Prob);
-                                                tmp4Prob = strtok(NULL, " ");
+                                                tmp4Prob = strtok(NULL, ", ");
                                         }
                         //              printf("neg: %f, non_neg[1]: %f\n", prob[0], prob[1]);
                                         sum_prob(prob[0], prob[1]);
@@ -93,7 +93,7 @@ void makeHash(FILE *f, GHashTable *read) {
                 char *t;
                 char * _line = line ;
                 char *prob;
-                t = strtok(line, " ");
+                t = strtok(line, ", ");
                 prob = strtok(NULL, "\n");
                 g_hash_table_insert(read, strdup(t), strdup(prob));
                 free(_line);
