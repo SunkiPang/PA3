@@ -18,7 +18,7 @@ int main() {
         GHashTable *read = g_hash_table_new(g_str_hash, g_str_equal);
         makeHash(f, read);
         // 제대로 hash 생성되었는지 확인
-              g_hash_table_foreach(read, print_prob, 0x0);
+//              g_hash_table_foreach(read, print_prob, 0x0);
         fclose(f);
         while(!feof(stdin)) {
                 neg_sum = 0;
