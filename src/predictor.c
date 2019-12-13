@@ -3,7 +3,9 @@
 #include <glib.h>
 #include <string.h>
 #include <math.h>
+#include "../include/libstemmer.h"
 #define STRING_SIZE 128
+
 void sum_prob(float, float);
 void makeHash(FILE *, GHashTable *);
 float cal_prob();
@@ -13,6 +15,7 @@ void print_prob (gpointer key, gpointer value, gpointer userdata) {
         printf("(%s, %s)\n", t, d) ;
 }
 float neg_sum, non_sum;
+int word_count = 0;
 int main() {
         FILE *f = fopen("../data/model.csv", "r");
         GHashTable *read = g_hash_table_new(g_str_hash, g_str_equal);
@@ -20,22 +23,25 @@ int main() {
         // 제대로 hash 생성되었는지 확인
 //              g_hash_table_foreach(read, print_prob, 0x0);
         fclose(f);
+		struct sb_stemmer * stemmer;
+		//stemmer = sb_stemmer_new("english", 0x0);
+		printf("word count : %d\n\n",word_count);
         while(!feof(stdin)) {
                 neg_sum = 0;
                 non_sum = 0;
                 char *temp;
-                char ch[STRING_SIZE];
-                char words[STRING_SIZE][STRING_SIZE] = {
-                        0,
-                }
-                ;
-                printf("Enter the message : ");
+				const char *temp2;
+				char ch[STRING_SIZE];
+                char words[STRING_SIZE][STRING_SIZE] = {0,};
+				printf("Enter the message : ");
                 gets(ch);
                 int count = 0;
                 temp = strtok(ch, " ");
                 while(temp != NULL) {
                         //입력받은 문장을 단어로 쪼개서 배열에 입력
-                        strcpy(words[count],temp);
+                        //temp2 = sb_stemmer_stem(stemmer, temp, strlen(temp));
+						//printf("%s\n",temp2);
+						strcpy(words[count],temp);
                         temp = strtok(NULL, " ");
                         count++;
                 }
@@ -98,5 +104,6 @@ void makeHash(FILE *f, GHashTable *read) {
                 g_hash_table_insert(read, strdup(t), strdup(prob));
                 free(_line);
                 line = 0x0;
+				word_count++;
         }
 }
